@@ -1,0 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FEEFAD;
+  }
+
+  
+  .toolbar {
+    background-color: #68D2E8;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .left-buttons {
+    margin-left: 10px;
+    gap: 20px;
+  }
+
+  .left-buttons button {
+    border-radius: 50%;
+  }
+
+  .right-buttons {
+    margin-right: 10px;
+    gap: 20px;
+  }
+  
+  button {
+    width: 65px;
+    height: 65px;
+    font-size: 20px;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #FEEFAD; 
+  }
+
+  button:hover{
+    background-color: #68D2E8;
+  }
+
+  button img {
+    width: 35px;
+  }
+  
