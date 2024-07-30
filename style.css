@@ -47,7 +47,10 @@ button img {
 h1 {
   font-weight: bold;
   text-align: center;
+  margin: 0;
+  font-size: 24px;
 }
+
 
 .newNote {
   width: 1100px;
