@@ -8,14 +8,14 @@ BEGIN TRANSACTION;
 
 CREATE TABLE IF NOT EXISTS users (
     user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_name TEXT NOT NULL,
-    user_password TEXT NOT NULL UNIQUE
+    username TEXT NOT NULL UNIQUE,
+    pass_word TEXT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS email_accounts (
-    email_account_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    email_address TEXT NOT NULL,
-    user_id  INT, --the user that the email account belongs to
+CREATE TABLE IF NOT EXISTS emails (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email_address TEXT NOT NULL UNIQUE,
+    user_id  INTEGER, --the user that the email account belongs to
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 

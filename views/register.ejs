@@ -18,16 +18,20 @@
         <header class="login-header">
             <h1>Mathote</h1>
         </header>
-        <form action="/login" method="post">
+        <form action="/register" method="post">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+            </div>
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" name="username">
             </div>
             <div class="mb-3">
-              <label for="inputPassword5" class="form-label">Password</label>
-              <input type="password" id="password" name="password" class="form-control" aria-describedby="passwordHelpBlock">
+                <label for="inputPassword5" class="form-label">Password</label>
+                <input type="password" id="password" name="password" class="form-control" aria-describedby="passwordHelpBlock">
             </div>
-            <button type="submit" class="btn btn-primary">Log In</button>
+            <button type="submit" class="btn btn-primary">Register</button>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

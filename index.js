@@ -30,9 +30,18 @@ app.get('/', (req, res) => {
     res.render('index')
 });
 
+
 // Add all the route handlers in usersRoutes to the app under the path /users
-const usersRoutes = require('./routes/users');
-app.use('/users', usersRoutes);
+const registerRoutes = require('./routes/register');
+app.use('/register', registerRoutes);
+
+// Add all the route handlers in usersRoutes to the app under the path /users
+const loginRoutes = require('./routes/login');
+app.use('/login', loginRoutes);
+
+// Add all the route handlers in usersRoutes to the app under the path /users
+const notesRoutes = require('./routes/notes');
+app.use('/notes', notesRoutes);
 
 
 // Make the web application listen for HTTP requests
