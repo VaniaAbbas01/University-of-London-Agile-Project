@@ -76,6 +76,11 @@ h1 {
   fill: #000; /* You can change the color here */
 }
 
+a:hover
+{
+  cursor: pointer;
+}
+
 /* login header */
 
 .login-header {
