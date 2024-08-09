@@ -4,10 +4,21 @@
 */
 
 // Set up express, bodyparser and EJS
+require('dotenv').config(); // Load environment variables
 const express = require('express');
 const app = express();
+const session = require('express-session');
+
+
 const port = 3000;
 var bodyParser = require("body-parser");
+// Configure session middleware
+app.use(session({
+    secret: process.env.SESSION_SECRET, // replace with your own secret
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // set to true if using https
+}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs'); // set the app to use ejs for rendering
 app.use(express.static(__dirname + '/public')); // set location of static files
@@ -25,23 +36,47 @@ global.db = new sqlite3.Database('./database.db',function(err){
     }
 });
 
-// Handle requests to the home page 
+// Middleware to check if the user is logged in
+function checkAuth(req, res, next) {
+    if (req.session.userId) {
+        return next();
+    } else {
+        res.redirect('/');
+    }
+}
+
+// Landing page route
 app.get('/', (req, res) => {
-    res.render('index')
+    if (req.session.userId) {
+        res.redirect('/taker');
+    } else {
+        res.render('index');
+    }
+});
+
+// Home page route
+app.get('/taker', checkAuth, (req, res) => {
+    res.render('taker', { username: req.session.username });
 });
 
 
-// Add all the route handlers in usersRoutes to the app under the path /users
-const registerRoutes = require('./routes/register');
-app.use('/register', registerRoutes);
-
-// Add all the route handlers in usersRoutes to the app under the path /users
-const loginRoutes = require('./routes/login');
-app.use('/login', loginRoutes);
+// Logout route
+app.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return res.send('Error logging out');
+        }
+        res.redirect('/');
+    });
+});
 
 // Add all the route handlers in usersRoutes to the app under the path /users
 const notesRoutes = require('./routes/notes');
 app.use('/notes', notesRoutes);
+
+// Add all the route handlers in usersRoutes to the app under the path /users
+const userRoutes = require('./routes/users');
+app.use('/users', userRoutes);
 
 
 // Make the web application listen for HTTP requests
