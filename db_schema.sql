@@ -19,6 +19,13 @@ CREATE TABLE IF NOT EXISTS emails (
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
+CREATE TABLE IF NOT EXISTS content (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    body Text NOT NULL,
+    user_id  INTEGER, --the user that the email account belongs to
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
 
 COMMIT;
 

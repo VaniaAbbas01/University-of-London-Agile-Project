@@ -29,11 +29,43 @@
           </button>
         </div>
       </div>
-      <div class="editor" contenteditable="true">
-        Write here...
-      </div>
-    </div>
 
+      <div class="editor" contenteditable="true">Write here...</div>
+      <!-- <input class="editor" placeholder="Write here..."></input> -->
+      <button
+        id="submitButton"
+        style="margin-left: 20px"
+        onclick="submitNote()"
+      >
+        Submit
+      </button>
+    </div>
+    <script defer>
+      function submitNote() {
+        const noteContent = document.querySelector(".editor").innerText;
+        // console.log(
+        //   noteContent + "new note js , is typeof",
+        //   typeof noteContent
+        // );
+
+        fetch("/notes/submitNote", {
+          method: "POST",
+          headers: {
+            "Content-Type": "text/plain", // Set content type to plain text
+          },
+          body: noteContent, // Send the content directly as text
+        })
+          .then((response) => response.text())
+          .then((data) => {
+            alert("Note saved successfully" + ": " + data);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("Error saving note");
+          });
+        location.href = "http://localhost:3000/";
+      }
+    </script>
     <script src="/public/script.js"></script>
   </body>
 </html>

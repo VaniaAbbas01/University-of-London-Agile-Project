@@ -26,7 +26,6 @@ body {
   gap: 20px;
 }
 
-
 .editor {
   border: 1px solid #ccc;
   margin: 20px;
@@ -59,7 +58,6 @@ h1 {
   font-size: 24px;
 }
 
-
 .newNote {
   display: flex;
   justify-content: space-between;
@@ -74,8 +72,7 @@ h1 {
   fill: #000; /* You can change the color here */
 }
 
-a:hover
-{
+a:hover {
   cursor: pointer;
 }
 
@@ -91,7 +88,6 @@ header {
   display: flex;
   justify-content: space-between;
 }
-
 
 h1 {
   font-weight: bold;
@@ -116,7 +112,7 @@ h1 {
   margin: 50px auto 0; /* 50px from the top, auto for left and right, 0 for bottom */
   width: 10%;
   display: grid;
-  grid-gap: 10px; 
+  grid-gap: 10px;
   text-align: center;
   padding: 70px;
   color: #000;
@@ -151,4 +147,18 @@ h1 {
 
 .login-container button:hover {
   background-color: #56c1d5;
+}
+
+#submitButton {
+  width: 60px;
+  height: 30px;
+  font-size: 16px;
+  border-radius: 0%;
+  padding: 0px;
+  cursor: pointer;
+  background-color: #ccc;
+}
+
+#submitButton:hover {
+  background: #56c1d5;
 }
