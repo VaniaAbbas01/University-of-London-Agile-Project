@@ -32,4 +32,48 @@ router.post("/submitNote", (req, res) => {
   );
 });
 
+router.get("/edit/:id", (req, res) => {
+  const noteId = req.params.id;
+  const userId = req.session.userId;
+
+  if (!userId) {
+    return res.status(401).send("User not logged in");
+  }
+
+  db.get(`SELECT * FROM content WHERE id = ? AND user_id = ?`, [noteId, userId], (err, note) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send("Error retrieving note");
+    }
+    if (!note) {
+      return res.status(404).send("Note not found");
+    }
+    res.render("editNote", { note });
+  });
+});
+
+router.put("/edit/:id", (req, res) => {
+  const noteId = req.params.id;
+  const userId = req.session.userId;
+  const newContent = req.body; // Assuming the content is passed as plain text
+
+  if (!userId) {
+    return res.status(401).send("User not logged in");
+  }
+
+  db.run(
+    `UPDATE content SET body = ? WHERE id = ? AND user_id = ?`,
+    [newContent, noteId, userId],
+    function (err) {
+      if (err) {
+        console.error(err);
+        return res.status(500).send("Error updating note");
+      }
+      res.send("SUCCESS");
+    }
+  );
+});
+
 module.exports = router;
+
+

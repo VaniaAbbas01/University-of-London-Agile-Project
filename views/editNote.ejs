@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Edit Note</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="toolbar">
+            <div class="left-buttons">
+                <button onclick="formatText('bold')"><b>B</b></button>
+                <button onclick="formatText('italic')"><em>I</em></button>
+                <button onclick="formatText('underline')"><u>U</u></button>
+            </div>
+            <div class="right-buttons">
+                <button class="calculator" onclick="openCalculator()">
+                    <img src="/assets/calculator(1).jpg" alt="" />
+                </button>
+                <button class="equation-solver" onclick="openEquationSolver()">
+                    <img src="/assets/equations.jpg" alt="" />
+                </button>
+                <button class="graphical-calculator" onclick="openGraphicalCalculator()">
+                    <img src="/assets/graphs.png" alt="" />
+                </button>
+            </div>
+        </div>
+        <div class="editor" contenteditable="true">
+            <%= note.body %>
+        </div>
+        <button id="saveButton" 
+        style="
+            width: 75px;
+            height: 50px;
+            font-size: 14px;
+            background-color: #68d2e8; /* Green background */
+            border: none; /* Remove borders */
+            color: black; /* White text */
+            padding: 10px;
+            display: inline-block; /* Inline block display */
+            border-radius: 30px; /* Rounded corners */" 
+            
+            onclick="saveNote()">
+            Save Changes
+        </button>
+    </div>
+    <script defer>
+        function saveNote() {
+            const noteContent = document.querySelector(".editor").innerText;
+            const noteId = "<%= note.id %>";
+
+            fetch(`/notes/edit/${noteId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "text/plain", // Set content type to plain text
+                },
+                body: noteContent, // Send the content directly as text
+            })
+                .then((response) => response.text())
+                .then((data) => {
+                    alert("Note updated successfully" + ": " + data);
+                    window.location.href = "/"; // Redirect to homepage or notes list
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    alert("Error updating note");
+                });
+        }
+    </script>
+    <script src="/script.js"></script>
+</body>
+
+</html>

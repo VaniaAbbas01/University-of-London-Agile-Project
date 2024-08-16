@@ -16,4 +16,8 @@ function formatText(command) {
     alert('Open Graphical Calculator');
     // Implement graphical calculator logic here
   }
+
+  
+
+  
   
