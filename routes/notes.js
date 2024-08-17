@@ -74,6 +74,27 @@ router.put("/edit/:id", (req, res) => {
   );
 });
 
+// Delete note route
+router.delete("/delete/:id", (req, res) => {
+  const noteId = req.params.id;
+  const userId = req.session.userId;
+
+  if (!userId) {
+      return res.status(401).send("User not logged in");
+  }
+
+  db.run(`DELETE FROM content WHERE id = ? AND user_id = ?`, [noteId, userId], function (err) {
+      if (err) {
+          console.error(err);
+          return res.status(500).send("Error deleting note");
+      }
+
+      if (this.changes === 0) {
+          return res.status(404).send("Note not found or not authorized to delete");
+      }
+
+      res.send("SUCCESS");
+  });
+});
+
 module.exports = router;
-
-
