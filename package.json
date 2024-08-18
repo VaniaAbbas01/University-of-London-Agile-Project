@@ -20,10 +20,7 @@
     "ejs": "^3.1.8",
     "express": "^4.18.2",
     "express-session": "^1.18.0",
-    "mathjs": "^13.0.3",
-    "sqlite3": "^5.1.7",
-    "wolfram-alpha-api": "^0.2.1",
-    "wolfram-alpha-node": "^0.0.3"
+    "sqlite3": "^5.1.7"
   },
   "engines": {
     "npm": ">=8.0.0",
