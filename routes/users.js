@@ -29,7 +29,7 @@ router.post("/register", (req, res) => {
       db.run(
         `INSERT INTO emails (user_id, email_address) VALUES (?, ?)`,
         [userId, email],
-        function (err) {
+        function ( err) {
           if (err) {
             return res.send("Error registering email");
           }

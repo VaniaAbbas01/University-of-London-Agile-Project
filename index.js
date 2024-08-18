@@ -57,7 +57,7 @@ app.get("/", (req, res) => {
   }
 });
 
-// Home page route
+
 // Home page route
 app.get("/taker", checkAuth, (req, res) => {
   // Fetch the content from the content table where the user_id matches the session userId

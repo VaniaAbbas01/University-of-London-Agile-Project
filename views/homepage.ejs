@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Document</title>
+    <title>Create A Note</title>
   </head>
   <body>
     <div class="container">
@@ -22,13 +22,19 @@
             <img src="assets/equations.jpg" alt="" />
           </button>
           <button
-            class="graphical-calculator"
-            onclick="openGraphicalCalculator()"
+            class="graphical-calculator" onclick=" openGraphicalCalculator()"
           >
             <img src="assets/graphs.png" alt="" />
           </button>
         </div>
       </div>
+      <div id="sci-calculator"></div>
+
+      <iframe src="https://www.desmos.com/scientific" width="300" height="400"></iframe>
+
+
+      <div id="calculator" style="width: 600px; height: 400px;"></div>
+      
 
       <div class="editor" contenteditable="true">Write here...</div>
       <!-- <input class="editor" placeholder="Write here..."></input> -->
@@ -65,7 +71,14 @@
           });
         location.href = "http://localhost:3000/";
       }
+
     </script>
-    <script src="/public/script.js"></script>
+    <script src="script.js"></script>
+    <script src="https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/scicalculator.js"></script>
+    <script>
+      const calculator = new SciCalculator();
+      calculator.render(document.getElementById('sci-calculator'));
+    </script>
   </body>
 </html>
