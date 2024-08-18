@@ -3,14 +3,16 @@
  * This is your main app entry point
  */
 
-// Set up express, bodyparser and EJS
-require("dotenv").config(); // Load environment variables
-const express = require("express");
-const app = express();
-const session = require("express-session");
+// Load environment variables
+require("dotenv").config();
 
+const express = require("express");
+const session = require("express-session");
+const bodyParser = require("body-parser");
+
+const app = express();
 const port = 3000;
-var bodyParser = require("body-parser");
+
 // Configure session middleware
 app.use(
   session({
@@ -20,19 +22,38 @@ app.use(
     cookie: { secure: false }, // set to true if using https
   })
 );
-app.use(bodyParser.urlencoded({ extended: true }));
+
+// Middleware to parse JSON and URL-encoded bodies
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // To handle text/plain requests
 app.use(bodyParser.text({ type: "text/plain" }));
-app.set("view engine", "ejs"); // set the app to use ejs for rendering
-app.use(express.static(__dirname + "/public")); // set location of static files
+
+// Set the view engine to EJS
+app.set("view engine", "ejs");
+
+// Set location of static files
+app.use(express.static(__dirname + "/public"));
+
+// Import and use the Wolfram Alpha routes
+const wolframRoutes = require("./routes/wolfram");
+app.use("/wolfram", wolframRoutes);
+
+// Add all the route handlers in notesRoutes to the app under the path /notes
+const notesRoutes = require("./routes/notes");
+app.use("/notes", notesRoutes);
+
+// Add all the route handlers in userRoutes to the app under the path /users
+const userRoutes = require("./routes/users");
+app.use("/users", userRoutes);
 
 // Set up SQLite
-// Items in the global namespace are accessible throught out the node application
 const sqlite3 = require("sqlite3").verbose();
 global.db = new sqlite3.Database("./database.db", function (err) {
   if (err) {
     console.error(err);
-    process.exit(1); // bail out we can't connect to the DB
+    process.exit(1); // bail out if we can't connect to the DB
   } else {
     console.log("Database connected");
     global.db.run("PRAGMA foreign_keys=ON"); // tell SQLite to pay attention to foreign key constraints
@@ -57,10 +78,9 @@ app.get("/", (req, res) => {
   }
 });
 
-
 // Home page route
 app.get("/taker", checkAuth, (req, res) => {
-  // Fetch the content from the content table where the user_id matches the session userId
+  // Fetch content from the content table where the user_id matches the session userId
   db.all(
     `SELECT body,timestamp,id FROM content WHERE user_id = ?`,
     [req.session.userId],
@@ -88,19 +108,7 @@ app.get("/logout", (req, res) => {
   });
 });
 
-// Add all the route handlers in usersRoutes to the app under the path /users
-const notesRoutes = require("./routes/notes");
-app.use("/notes", notesRoutes);
-
-// Add all the route handlers in usersRoutes to the app under the path /users
-const userRoutes = require("./routes/users");
-app.use("/users", userRoutes);
-
 // Make the web application listen for HTTP requests
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
-
-// const bodyParser = require("body-parser");
-
-

@@ -14,12 +14,16 @@
   "author": "Simon Katan",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.7.4",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
     "express-session": "^1.18.0",
-    "sqlite3": "^5.1.7"
+    "mathjs": "^13.0.3",
+    "sqlite3": "^5.1.7",
+    "wolfram-alpha-api": "^0.2.1",
+    "wolfram-alpha-node": "^0.0.3"
   },
   "engines": {
     "npm": ">=8.0.0",
