@@ -2,12 +2,13 @@ function formatText(command) {
     document.execCommand(command, false, null);
   }
   
-  function openCalculator() {
-    alert('Open Calculator');
-    // Implement calculator logic here
-  }
-  
-// script.js
+  function openSciCalculator() {
+   
+    const calculatorDiv = document.getElementById("sci-calculator");
+    calculatorDiv.style.display = "block"; // Make the calculator div visible
+
+    const calculator = Desmos.ScientificCalculator(calculatorDiv);
+}
 
 function openEquationSolver() {
   const equation = prompt("Enter your equation:");
@@ -87,7 +88,7 @@ function displayResults(results) {
   
   function openGraphicalCalculator() {
 
-      var elt = document.getElementById('calculator');
+      var elt = document.getElementById('graphical-calculator');
       var calculator = Desmos.GraphingCalculator(elt);
    
   }

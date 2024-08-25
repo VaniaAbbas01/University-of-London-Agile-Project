@@ -23,6 +23,12 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  res.setHeader('Cache-Control', 'no-store');
+  next();
+});
+
+
 // Middleware to parse JSON and URL-encoded bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -102,11 +108,14 @@ app.get("/taker", checkAuth, (req, res) => {
 app.get("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
-      return res.send("Error logging out");
+      console.error("Error destroying session:", err);
+      return res.status(500).send("Error logging out. Please try again.");
     }
-    res.redirect("/");
+    res.clearCookie('connect.sid'); // Clear the session cookie if needed
+    res.redirect("/"); // Redirect to homepage or login page
   });
 });
+
 
 // Make the web application listen for HTTP requests
 app.listen(port, () => {

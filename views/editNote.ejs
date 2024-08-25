@@ -18,7 +18,7 @@
                 <button onclick="formatText('underline')"><u>U</u></button>
             </div>
             <div class="right-buttons">
-                <button class="calculator" onclick="openCalculator()">
+                <button class="sci-calculator" onclick="openSciCalculator()">
                     <img src="/assets/calculator(1).jpg" alt="" />
                 </button>
                 <button class="equation-solver" onclick="openEquationSolver()">
@@ -29,6 +29,8 @@
                 </button>
             </div>
         </div>
+        <div id="sci-calculator" style="width: 430px; height: 400px;"></div>
+        <div id="graphical-calculator" style="width: 600px; height: 400px;"></div>
         <div class="editor" contenteditable="true">
             <%= note.body %>
         </div>
@@ -72,6 +74,9 @@
         }
     </script>
     <script src="/script.js"></script>
+    <script src="script.js"></script>
+    <script src="https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/scicalculator.js"></script>
 </body>
 
 </html>
