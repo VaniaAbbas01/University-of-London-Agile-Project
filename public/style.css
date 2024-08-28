@@ -33,6 +33,12 @@ body {
   padding: 10px;
 }
 
+.existing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 button {
   width: 65px;
   height: 65px;
