@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Create A Note</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="toolbar">
+        <div class="left-buttons">
+          <button onclick="formatText('bold')"><b>B</b></button>
+          <button onclick="formatText('italic')"><em>I</em></button>
+          <button onclick="formatText('underline')"><u>U</u></button>
+        </div>
+        <div class="right-buttons">
+          <button class="sci-calculator" onclick="openSciCalculator()">
+            <img src="assets/calculator(1).jpg" alt="" />
+          </button>
+          <button class="equation-solver" onclick="openEquationSolver()">
+            <img src="assets/equations.jpg" alt="" />
+          </button>
+          <button class="graphical-calculator" onclick="openGraphicalCalculator()">
+            <img src="assets/graphs.png" alt="" />
+          </button>
+        </div>
+      </div>
+      <div id="sci-calculator" style="width: 430px; height: 400px;"></div>
+      <div id="graphical-calculator" style="width: 600px; height: 400px;"></div>
+      <div class="editor" contenteditable="true">Write here...</div>
+      <button id="submitButton" style="margin-left: 20px" onclick="submitNote()">
+        Submit
+      </button>
+    </div>
+    <script defer>
+      function submitNote() {
+        const noteContent = document.querySelector(".editor").innerText;
+        // console.log(
+        //   noteContent + "new note js , is typeof",
+        //   typeof noteContent
+        // );
+
+        fetch("/notes/submitNote", {
+          method: "POST",
+          headers: {
+            "Content-Type": "text/plain", // Set content type to plain text
+          },
+          body: noteContent, // Send the content directly as text
+        })
+          .then((response) => response.text())
+          .then((data) => {
+            alert("Note saved successfully" + ": " + data);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("Error saving note");
+          });
+        location.href = "http://localhost:3000/";
+      }
+
+    </script>
+    <script src="script.js"></script>
+    <script src="https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/scicalculator.js"></script>
+  </body>
+</html>

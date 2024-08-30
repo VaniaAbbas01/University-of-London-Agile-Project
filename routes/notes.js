@@ -4,7 +4,7 @@ const router = express.Router();
 router.use(express.text());
 
 router.get("/", (req, res) => {
-  res.render("homepage");
+  res.render("createNote");
 });
 router.post("/submitNote", (req, res) => {
   let body = req.body; // Now treating body as plain text

@@ -78,14 +78,14 @@ function checkAuth(req, res, next) {
 // Landing page route
 app.get("/", (req, res) => {
   if (req.session.userId) {
-    res.redirect("/taker");
+    res.redirect("/homepage");
   } else {
     res.render("index");
   }
 });
 
 // Home page route
-app.get("/taker", checkAuth, (req, res) => {
+app.get("/homepage", checkAuth, (req, res) => {
   // Fetch content from the content table where the user_id matches the session userId
   db.all(
     `SELECT body,timestamp,id FROM content WHERE user_id = ?`,
@@ -96,7 +96,7 @@ app.get("/taker", checkAuth, (req, res) => {
       }
 
       // Pass both username and content to the EJS template in a single object
-      res.render("taker", {
+      res.render("homepage", {
         username: req.session.username,
         content: content, // content is an array of objects with a 'body' property
       });

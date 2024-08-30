@@ -34,7 +34,7 @@ router.post("/register", (req, res) => {
             return res.send("Error registering email");
           }
 
-          res.redirect("/taker");
+          res.redirect("/homepage");
         }
       );
     }
@@ -65,7 +65,7 @@ router.post("/login", (req, res) => {
     
     console.log(req.session.userId, req.session.username);
 
-    res.redirect("/taker");
+    res.redirect("/homepage");
   });
 });
 
