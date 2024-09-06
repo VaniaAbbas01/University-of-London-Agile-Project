@@ -10,7 +10,6 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
   <link rel="stylesheet" href="style.css" />
 
-
   <title>Homepage</title>
 </head>
 
@@ -73,20 +72,20 @@
         fetch(`/notes/delete/${noteId}`, {
           method: "DELETE",
         })
-          .then(response => response.text())
-          .then(data => {
-            alert("Note deleted successfully" + ": " + data);
-            window.location.reload(); // Reload the page to update the notes list
+          .then((response) => response.text())
+          .then((data) => {
+            alert("Note deleted successfully: " + data);
+            setTimeout(() => {
+              window.location.reload(); // Reload the page after a delay
+            }, 500); // Delay by 500ms
           })
-          .catch(error => {
+          .catch((error) => {
             console.error("Error:", error);
             alert("Error deleting note");
           });
       }
     }
-
+    
   </script>
-
 </body>
-
 </html>

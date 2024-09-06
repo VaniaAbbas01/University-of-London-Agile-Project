@@ -41,7 +41,6 @@ function openEquationSolver() {
   });
 }
 
-
 function displayResults(results) {
   // Create a new div element to hold the results
   const resultDiv = document.createElement("div");
@@ -84,14 +83,12 @@ function displayResults(results) {
   document.body.appendChild(resultDiv);
 }
 
+function openGraphicalCalculator() {
 
-  
-  function openGraphicalCalculator() {
+    var elt = document.getElementById('graphical-calculator');
+    var calculator = Desmos.GraphingCalculator(elt);
 
-      var elt = document.getElementById('graphical-calculator');
-      var calculator = Desmos.GraphingCalculator(elt);
-   
-  }
+}
 
 //   // script.js
 // document.getElementById("graphical-calculator").addEventListener("click", function() {
@@ -109,8 +106,3 @@ function displayResults(results) {
 //   // Append the new div to the container
 //   document.getElementById("container").appendChild(newDiv);
 // });
-
-  
-
-  
-  

@@ -36,29 +36,27 @@
     <script defer>
       function submitNote() {
         const noteContent = document.querySelector(".editor").innerText;
-        // console.log(
-        //   noteContent + "new note js , is typeof",
-        //   typeof noteContent
-        // );
-
+      
         fetch("/notes/submitNote", {
           method: "POST",
           headers: {
-            "Content-Type": "text/plain", // Set content type to plain text
+            "Content-Type": "text/plain",
           },
-          body: noteContent, // Send the content directly as text
+          body: noteContent,
         })
           .then((response) => response.text())
           .then((data) => {
-            alert("Note saved successfully" + ": " + data);
+            alert("Note saved successfully: " + data);
+            setTimeout(() => {
+              location.href = "http://localhost:3000/";
+            }, 500); // Delay by 500ms
           })
           .catch((error) => {
             console.error("Error:", error);
             alert("Error saving note");
           });
-        location.href = "http://localhost:3000/";
       }
-
+      
     </script>
     <script src="script.js"></script>
     <script src="https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>

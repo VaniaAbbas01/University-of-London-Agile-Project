@@ -54,29 +54,31 @@
         function saveNote() {
             const noteContent = document.querySelector(".editor").innerText;
             const noteId = "<%= note.id %>";
-
+          
             fetch(`/notes/edit/${noteId}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "text/plain", // Set content type to plain text
-                },
-                body: noteContent, // Send the content directly as text
+              method: "PUT",
+              headers: {
+                "Content-Type": "text/plain",
+              },
+              body: noteContent,
             })
-                .then((response) => response.text())
-                .then((data) => {
-                    alert("Note updated successfully" + ": " + data);
-                    window.location.href = "/"; // Redirect to homepage or notes list
-                })
-                .catch((error) => {
-                    console.error("Error:", error);
-                    alert("Error updating note");
-                });
-        }
+              .then((response) => response.text())
+              .then((data) => {
+                alert("Note updated successfully: " + data);
+                setTimeout(() => {
+                  window.location.href = "/"; // Redirect to homepage or notes list after a delay
+                }, 500); // Delay by 500ms
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+                alert("Error updating note");
+              });
+          }
+          
     </script>
     <script src="/script.js"></script>
     <script src="script.js"></script>
     <script src="https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
     <script src="https://cdn.jsdelivr.net/npm/scicalculator.js"></script>
 </body>
-
 </html>
