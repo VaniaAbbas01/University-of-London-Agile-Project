@@ -95,6 +95,9 @@ function displayResults(results) {
 
     // Append the result div to the body of the document
     document.body.appendChild(resultDiv);
+
+    // Scroll to the result div
+    resultDiv.scrollIntoView({ behavior: "smooth" });
 }
 
 //---------------------Graphical Calculator---------------------------------
