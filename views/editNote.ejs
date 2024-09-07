@@ -13,24 +13,26 @@
 
         <div class="toolbar">
             <div class="left-buttons">
-                <button onclick="formatText('bold')"><b>B</b></button>
-                <button onclick="formatText('italic')"><em>I</em></button>
-                <button onclick="formatText('underline')"><u>U</u></button>
-            </div>
+                <button onclick="formatText('bold')" title="Make text Bold (Ctrl + B)"><b>B</b></button>
+                <button onclick="formatText('italic')" title="Make text Italic (Ctrl + I)"><em>I</em></button>
+                <button onclick="formatText('underline')" title="Make text Underline (Ctrl + U)"><u>U</u></button>          
+              </div>
             <div class="right-buttons">
-                <button class="sci-calculator" onclick="openSciCalculator()">
+                <button class="sci-calculator" onclick="openSciCalculator()" title="Scientific Calculator">
                     <img src="/assets/calculator(1).jpg" alt="" />
                 </button>
-                <button class="equation-solver" onclick="openEquationSolver()">
+                <button class="equation-solver" onclick="openEquationSolver()" title="Equation Solver">
                     <img src="/assets/equations.jpg" alt="" />
                 </button>
-                <button class="graphical-calculator" onclick="openGraphicalCalculator()">
+                <button class="graphical-calculator" onclick="openGraphicalCalculator()" title="Graphical Calculator">
                     <img src="/assets/graphs.png" alt="" />
                 </button>
             </div>
         </div>
-        <div id="sci-calculator" style="width: 430px; height: 400px;"></div>
-        <div id="graphical-calculator" style="width: 600px; height: 400px;"></div>
+        <div class="calculators">
+            <div id="sci-calculator" class="calculator-container" style="width: 430px; height: 400px;"></div>
+            <div id="graphical-calculator" class="calculator-container" style="width: 600px; height: 400px;"></div>
+           </div>
         <div class="editor" contenteditable="true">
             <%= note.body %>
         </div>
@@ -51,30 +53,37 @@
         </button>
     </div>
     <script defer>
-        function saveNote() {
+        // Function to save an existing note
+        function saveNote() 
+        {
+            // Get the content of the note from the editor
             const noteContent = document.querySelector(".editor").innerText;
+            // Get the note ID from the server-side template
             const noteId = "<%= note.id %>";
-          
+
+            // Send the updated note content to the server using a PUT request
             fetch(`/notes/edit/${noteId}`, {
-              method: "PUT",
-              headers: {
-                "Content-Type": "text/plain",
-              },
-              body: noteContent,
+                method: "PUT",
+                headers: {
+                    "Content-Type": "text/plain",
+                },
+                body: noteContent,
             })
-              .then((response) => response.text())
-              .then((data) => {
+            .then((response) => response.text()) // Convert the response to text
+            .then((data) => {
+                // Show a success alert with the response data
                 alert("Note updated successfully: " + data);
+                // Redirect to the homepage after a 500ms delay
                 setTimeout(() => {
-                  window.location.href = "/"; // Redirect to homepage or notes list after a delay
-                }, 500); // Delay by 500ms
-              })
-              .catch((error) => {
+                    window.location.href = "/"; // Redirect to homepage or notes list after a delay
+                }, 500);
+            })
+            .catch((error) => {
+                // Log the error and show an error alert
                 console.error("Error:", error);
                 alert("Error updating note");
-              });
-          }
-          
+            });
+        }
     </script>
     <script src="/script.js"></script>
     <script src="script.js"></script>

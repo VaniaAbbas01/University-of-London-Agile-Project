@@ -6,6 +6,7 @@
 // Load environment variables
 require("dotenv").config();
 
+// Import and use the necessary modules
 const express = require("express");
 const session = require("express-session");
 const bodyParser = require("body-parser");
@@ -23,6 +24,7 @@ app.use(
   })
 );
 
+// Middleware to prevent caching
 app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-store');
   next();
@@ -115,7 +117,6 @@ app.get("/logout", (req, res) => {
     res.redirect("/"); // Redirect to homepage or login page
   });
 });
-
 
 // Make the web application listen for HTTP requests
 app.listen(port, () => {

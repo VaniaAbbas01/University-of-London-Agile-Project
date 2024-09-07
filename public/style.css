@@ -1,8 +1,12 @@
+/* Set the font and background color for the entire body */
 body {
   font-family: Arial, sans-serif;
   background-color: #feefad;
 }
 
+/* --------------------- createNote.ejs & editNote.ejs --------------------------------- */
+
+/* Style the toolbar */
 .toolbar {
   background-color: #68d2e8;
   display: flex;
@@ -12,33 +16,7 @@ body {
   padding-bottom: 80px;
 }
 
-.left-buttons {
-  margin-left: 10px;
-  gap: 20px;
-}
-
-.left-buttons button {
-  border-radius: 50%;
-}
-
-.right-buttons {
-  margin-right: 10px;
-  gap: 20px;
-}
-
-.editor {
-  border: 1px solid #ccc;
-  margin: 20px;
-  min-height: 300px;
-  padding: 10px;
-}
-
-.existing {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
+/* Style all buttons for text decor & math features */
 button {
   width: 65px;
   height: 65px;
@@ -49,21 +27,63 @@ button {
   background-color: #feefad;
 }
 
+/* Change button background color on hover */
 button:hover {
   background-color: #68d2e8;
 }
 
+/* Style images inside buttons */
 button img {
   width: 35px;
 }
 
-h1 {
-  font-weight: bold;
-  text-align: center;
-  margin: 0;
-  font-size: 24px;
+/* Style the left buttons of texts decor in the toolbar */
+.left-buttons {
+  margin-left: 10px;
+  gap: 20px;
 }
 
+/* Style individual buttons in the left-buttons section */
+.left-buttons button {
+  border-radius: 50%;
+}
+
+/* Style the right buttons of math features in the toolbar */
+.right-buttons {
+  margin-right: 10px;
+  gap: 20px;
+}
+
+/* Style the editor area */
+.editor {
+  border: 1px solid #ccc;
+  margin: 20px;
+  min-height: 300px;
+  padding: 10px;
+}
+
+/* Hide the calculator container by default */
+.calculator-container {
+  display: none;
+}
+
+/* Style the calculators section */
+.calculators {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+/* --------------------- homepage.ejs & index.ejs --------------------------------- */
+
+/* Style the existing notes section */
+.existing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style the new note section */
 .newNote {
   display: flex;
   justify-content: space-between;
@@ -72,30 +92,21 @@ h1 {
   margin: 50px;
 }
 
+/* Style SVG elements inside the new note section */
 .newNote svg {
   width: 100px;
   height: 100px;
   fill: #000; /* You can change the color here */
 }
 
+/* Change cursor to pointer on hover for links */
 a:hover {
   cursor: pointer;
 }
 
-/* login header */
+/* --------------------- homepage.ejs, index.ejs, login.ejs & register.ejs -------- */
 
-.login-header {
-  background-color: #56c1d5;
-  padding: 20px;
-  text-align: center;
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-  background-color: #56c1d5;
-}
-
+/* Style all h1 elements */
 h1 {
   font-weight: bold;
   text-align: center;
@@ -103,59 +114,35 @@ h1 {
   font-size: 24px;
 }
 
+/* Style the login header */
+.login-header {
+  background-color: #56c1d5;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Style the header */
+header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #56c1d5;
+}
+
+/* Style links inside the login header */
 .login-header a {
   color: black;
   text-decoration: none;
   font-size: 16px;
 }
 
+/* Underline links on hover inside the login header */
 .login-header a:hover {
   text-decoration: underline;
 }
 
-/* login container   */
-.login-container {
-  position: relative;
-  margin: 50px auto 0; /* 50px from the top, auto for left and right, 0 for bottom */
-  width: 10%;
-  display: grid;
-  grid-gap: 10px;
-  text-align: center;
-  padding: 70px;
-  color: #000;
-  border: 5px solid #000;
-  border-radius: 8px;
-}
+/* --------------------- createNote.ejs --------------------------------------------- */
 
-.login-container label {
-  display: block;
-  margin: 1px 0 2px;
-}
-
-.login-container input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  background-color: #fffdf4;
-  border: 1px solid #000000;
-  border-radius: 5px;
-}
-
-.login-container button {
-  width: 100%;
-  padding: 10px;
-  background-color: #68d2e8;
-  border: none;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.login-container button:hover {
-  background-color: #56c1d5;
-}
-
+/* Style the submit button */
 #submitButton {
   width: 80px;
   height: 50px;
@@ -167,6 +154,7 @@ h1 {
   background-color: #56c1d5;
 }
 
+/* Change submit button background color on hover */
 #submitButton:hover {
   background: #56c1d5;
 }

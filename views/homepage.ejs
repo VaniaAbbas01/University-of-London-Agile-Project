@@ -35,57 +35,61 @@
 
     <h2 class="existing">Existing Notes</h2>
     <% let counter=1; %>
-      <div class="container">
-        <div class="row">
-          <% content.forEach(function(note) { %>
-            <div class="col-md-4">
-              <div class="card mb-4" style="width: 18rem; background-color: #56c1d5;">
-                <div class="card-body">
-                  <p class="card-text border py-5 text-center bg-light" id="note-<%= counter %>"
-                    style="background-color: #feefad;">
-                    <%= note.body %>
-                  </p>
-                  <p class="card-subtitle mb-2 text-body-secondary" style="font-size: x-small;">
-                    Created At: <%= new Date(note.timestamp).toLocaleString() %>
-                  </p>
-                  <a href="/notes/edit/<%= note.id %>" class="btn btn-primary">Edit</a>
-                  <a href="#" class="btn btn-danger" onclick="deleteNote('<%= note.id %>')">Delete</a>
-                </div>
-              </div>
+    <div class="container">
+      <div class="row">
+        <% content.forEach(function(note) { %>
+          <div class="col-md-4">
+            <div class="card mb-4" style="width: 18rem; background-color: #56c1d5;">
+              <div class="card-body">
+                <p class="card-text border py-5 text-center bg-light" id="note-<%= counter %>" 
+                  style="background-color: #feefad;">
+                  <%= note.body %>
+                </p>
+                <p class="card-subtitle mb-2 text-body-secondary" style="font-size: x-small;">
+                  Created At: <%= new Date(note.timestamp).toLocaleString() %>
+                </p>
+                <a href="/notes/edit/<%= note.id %>" class="btn btn-primary">Edit</a>
+                <a href="#" class="btn btn-danger" onclick="deleteNote('<%= note.id %>')">Delete</a>
               </div>
             </div>
-        </div>
-        <% counter++; %>
-          <% }); %>
+          </div>
+          <% counter++; %>
+        <% }); %>
       </div>
-  </div>
-
-  </div>
+    </div> 
+    </div>
   <div id="results"></div>
   <script>
     src = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity = "sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin = "anonymous"
 
-    function deleteNote(noteId) {
-      if (confirm("Are you sure you want to delete this note?")) {
-        fetch(`/notes/delete/${noteId}`, {
-          method: "DELETE",
-        })
-          .then((response) => response.text())
-          .then((data) => {
-            alert("Note deleted successfully: " + data);
-            setTimeout(() => {
-              window.location.reload(); // Reload the page after a delay
-            }, 500); // Delay by 500ms
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-            alert("Error deleting note");
-          });
-      }
-    }
-    
+      // Function to delete a note
+      function deleteNote(noteId) 
+      {
+        // Confirm with the user before deleting the note
+        if (confirm("Are you sure you want to delete this note?")) 
+        {
+            // Send a DELETE request to the server to delete the note
+            fetch(`/notes/delete/${noteId}`, {
+                method: "DELETE",
+            })
+            .then((response) => response.text()) // Convert the response to text
+            .then((data) => {
+                // Show a success alert with the response data
+                alert("Note deleted successfully: " + data);
+                // Reload the page after a 500ms delay
+                setTimeout(() => {
+                    window.location.reload(); // Reload the page after a delay
+                }, 500);
+            })
+            .catch((error) => {
+                // Log the error and show an error alert
+                console.error("Error:", error);
+                alert("Error deleting note");
+            });
+        }
+      }    
   </script>
 </body>
 </html>

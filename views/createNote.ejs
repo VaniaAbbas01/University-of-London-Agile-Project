@@ -10,53 +10,61 @@
     <div class="container">
       <div class="toolbar">
         <div class="left-buttons">
-          <button onclick="formatText('bold')"><b>B</b></button>
-          <button onclick="formatText('italic')"><em>I</em></button>
-          <button onclick="formatText('underline')"><u>U</u></button>
+          <button onclick="formatText('bold')" title="Make text Bold (Ctrl + B)"><b>B</b></button>
+          <button onclick="formatText('italic')" title="Make text Italic (Ctrl + I)"><em>I</em></button>
+          <button onclick="formatText('underline')" title="Make text Underline (Ctrl + U)"><u>U</u></button>          
         </div>
         <div class="right-buttons">
-          <button class="sci-calculator" onclick="openSciCalculator()">
-            <img src="assets/calculator(1).jpg" alt="" />
-          </button>
-          <button class="equation-solver" onclick="openEquationSolver()">
-            <img src="assets/equations.jpg" alt="" />
-          </button>
-          <button class="graphical-calculator" onclick="openGraphicalCalculator()">
-            <img src="assets/graphs.png" alt="" />
-          </button>
+          <button class="sci-calculator" onclick="openSciCalculator()" title="Scientific Calculator">
+            <img src="assets/calculator(1).jpg" alt="Scientific Calculator" />
+        </button>
+        <button class="equation-solver" onclick="openEquationSolver()" title="Equation Solver">
+            <img src="assets/equations.jpg" alt="Equation Solver" />
+        </button>
+        <button class="graphical-calculator" onclick="openGraphicalCalculator()" title="Graphical Calculator">
+            <img src="assets/graphs.png" alt="Graphical Calculator" />
+        </button>        
         </div>
       </div>
-      <div id="sci-calculator" style="width: 430px; height: 400px;"></div>
-      <div id="graphical-calculator" style="width: 600px; height: 400px;"></div>
-      <div class="editor" contenteditable="true">Write here...</div>
+      <div class="calculators">
+      <div id="sci-calculator" class="calculator-container" style="width: 430px; height: 400px;"></div>
+      <div id="graphical-calculator" class="calculator-container" style="width: 600px; height: 400px;"></div>
+     </div>
+      <div class="editor" contenteditable="true">Write here... </div>
       <button id="submitButton" style="margin-left: 20px" onclick="submitNote()">
         Submit
       </button>
     </div>
     <script defer>
-      function submitNote() {
-        const noteContent = document.querySelector(".editor").innerText;
-      
-        fetch("/notes/submitNote", {
-          method: "POST",
-          headers: {
-            "Content-Type": "text/plain",
-          },
-          body: noteContent,
-        })
-          .then((response) => response.text())
+        // Function to submit a note
+        function submitNote() 
+        {
+          // Get the content of the note from the editor
+          const noteContent = document.querySelector(".editor").innerText;
+
+          // Send the note content to the server using a POST request
+          fetch("/notes/submitNote", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "text/plain",
+              },
+              body: noteContent,
+          })
+          .then((response) => response.text()) // Convert the response to text
           .then((data) => {
-            alert("Note saved successfully: " + data);
-            setTimeout(() => {
-              location.href = "http://localhost:3000/";
-            }, 500); // Delay by 500ms
+              // Show a success alert with the response data
+              alert("Note saved successfully: " + data);
+              // Redirect to the homepage after a 500ms delay
+              setTimeout(() => {
+                  location.href = "http://localhost:3000/";
+              }, 500);
           })
           .catch((error) => {
-            console.error("Error:", error);
-            alert("Error saving note");
+              // Log the error and show an error alert
+              console.error("Error:", error);
+              alert("Error saving note");
           });
-      }
-      
+        }
     </script>
     <script src="script.js"></script>
     <script src="https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
