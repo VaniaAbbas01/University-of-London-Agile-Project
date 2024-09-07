@@ -30,7 +30,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
 // Middleware to parse JSON and URL-encoded bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
